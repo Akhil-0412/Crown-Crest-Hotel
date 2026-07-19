@@ -58,7 +58,7 @@ app = FastAPI(title="NexCell Hotel Backend", version="2026.1.0", lifespan=lifesp
 # Mount static assets (images, CSS, etc.)
 _assets_dir = os.path.join(os.path.dirname(__file__), "assets")
 if os.path.isdir(_assets_dir):
-    app.mount("/assets", StaticFiles(directory=_assets_dir), name="assets")
+    app.mount("/api/assets", StaticFiles(directory=_assets_dir), name="assets")
 
 # Mount Starlette payment routes & invoice routes
 for route in payment_routes + invoice_routes:
@@ -75,13 +75,13 @@ def read_root() -> str:
     <html><body style="font-family:sans-serif;padding:40px;background:#0f172a;color:#e2e8f0">
     <h1>🏨 NexCell Hotel Backend</h1>
     <p>MCP Server: <code>http://127.0.0.1:8000/sse</code></p>
-    <p>Payment Portal: <code>/pay/&lt;reference&gt;</code></p>
+    <p>Payment Portal: <code>/api/pay/&lt;reference&gt;</code></p>
     <p>Status: <strong style="color:#4ade80">Running ✓</strong></p>
     </body></html>
     """
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health_check() -> dict:
     return {"status": "ok", "service": "nexcell-backend"}
 

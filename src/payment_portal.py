@@ -80,7 +80,7 @@ async def process_payment(request: Request) -> RedirectResponse:
     booking = get_booking(reference)
 
     if not booking or booking["status"] != "LOCKED":
-        return RedirectResponse(url=f"/pay/{reference}?error=invalid_state", status_code=303)
+        return RedirectResponse(url=f"/api/pay/{reference}?error=invalid_state", status_code=303)
 
     form = await request.form()
     card_number = str(form.get("card_number", "0000"))
@@ -105,7 +105,7 @@ async def process_payment(request: Request) -> RedirectResponse:
             pass
     asyncio.create_task(send_invoice())
 
-    return RedirectResponse(url=f"/pay/success/{new_reference}", status_code=303)
+    return RedirectResponse(url=f"/api/pay/success/{new_reference}", status_code=303)
 
 
 async def view_payment_success(request: Request) -> HTMLResponse:
@@ -149,7 +149,7 @@ async def process_diff_payment(request: Request) -> RedirectResponse:
     booking = get_booking(reference)
 
     if not booking:
-        return RedirectResponse(url=f"/pay/diff/{reference}?error=not_found", status_code=303)
+        return RedirectResponse(url=f"/api/pay/diff/{reference}?error=not_found", status_code=303)
 
     form = await request.form()
     card_number = str(form.get("card_number", "0000"))
@@ -177,7 +177,7 @@ async def process_diff_payment(request: Request) -> RedirectResponse:
             pass
     asyncio.create_task(send_invoice())
 
-    return RedirectResponse(url=f"/pay/success/{reference}", status_code=303)
+    return RedirectResponse(url=f"/api/pay/success/{reference}", status_code=303)
 
 
 # ---------------------------------------------------------------------------
@@ -185,9 +185,9 @@ async def process_diff_payment(request: Request) -> RedirectResponse:
 # ---------------------------------------------------------------------------
 
 payment_routes = [
-    Route("/pay/success/{reference}", view_payment_success, methods=["GET"]),
-    Route("/pay/diff/{reference}",    view_diff_payment,    methods=["GET"]),
-    Route("/pay/diff/{reference}",    process_diff_payment, methods=["POST"]),
-    Route("/pay/{reference}",         view_payment_page,    methods=["GET"]),
-    Route("/pay/{reference}",         process_payment,      methods=["POST"]),
+    Route("/api/pay/success/{reference}", view_payment_success, methods=["GET"]),
+    Route("/api/pay/diff/{reference}",    view_diff_payment,    methods=["GET"]),
+    Route("/api/pay/diff/{reference}",    process_diff_payment, methods=["POST"]),
+    Route("/api/pay/{reference}",         view_payment_page,    methods=["GET"]),
+    Route("/api/pay/{reference}",         process_payment,      methods=["POST"]),
 ]

@@ -758,10 +758,10 @@ async def _generate_invoice_html(booking_id: str, email_address: str) -> tuple[b
         branch_name=booking["branch"].title(),
         branch_address=address_html,
         branch_address_inline=address_inline,
-        img_prefix=f"{PUBLIC_URL}/assets/images/",
-        payment_url=f"{PUBLIC_URL}/pay/{booking_id}",
-        diff_payment_url=f"{PUBLIC_URL}/pay/diff/{booking_id}?amount={balance_due}",
-        invoice_url=f"{PUBLIC_URL}/invoice/{booking_id}",
+        img_prefix=f"{PUBLIC_URL}/api/assets/images/",
+        payment_url=f"{PUBLIC_URL}/api/pay/{booking_id}",
+        diff_payment_url=f"{PUBLIC_URL}/api/pay/diff/{booking_id}?amount={balance_due}",
+        invoice_url=f"{PUBLIC_URL}/api/invoice/{booking_id}",
         payments=payments,
         total_paid=total_paid,
         balance_due=balance_due,
@@ -844,7 +844,7 @@ async def view_invoice(request: Request) -> HTMLResponse:
 from starlette.routing import Route
 invoice_routes = [
     Route("/api/invoice", api_invoice, methods=["POST"]),
-    Route("/invoice/{booking_id}", view_invoice, methods=["GET"]),
+    Route("/api/invoice/{booking_id}", view_invoice, methods=["GET"]),
 ]
 
 
