@@ -33,6 +33,8 @@ if os.environ.get("PUBLIC_URL"):
     PUBLIC_URL = os.environ["PUBLIC_URL"].rstrip("/")
 elif os.environ.get("RENDER_EXTERNAL_URL"):
     PUBLIC_URL = os.environ["RENDER_EXTERNAL_URL"].rstrip("/")
+elif os.environ.get("SPACE_HOST"):
+    PUBLIC_URL = f"https://{os.environ['SPACE_HOST']}"
 elif os.environ.get("SPACE_ID"):
     raise ValueError("CRITICAL ERROR: PUBLIC_URL environment variable is required on Hugging Face.")
 else:
