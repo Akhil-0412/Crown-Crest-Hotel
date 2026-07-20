@@ -3,36 +3,36 @@
 <head>
     <meta charset="utf-8">
     <style>
-        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 20px; background-color: #f9f9f9; }
-        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0; border: 1px solid #e0e0e0; }
-        .header { padding: 30px; text-align: left; }
-        .logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #f39c12; display: block; }
-        .greeting { padding: 0 30px; margin-top: 10px; font-size: 16px; color: #555; }
-        .title { padding: 0 30px; font-size: 28px; font-weight: bold; color: #000; margin-bottom: 5px; }
-        .confirmation { padding: 0 30px; font-size: 16px; margin-bottom: 20px; border-bottom: 2px solid #e0e0e0; padding-bottom: 20px; }
-        .conf-number { color: #f39c12; font-weight: bold; }
+        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 20px; background-color: #f5f8fa; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .header { padding: 30px; text-align: left; background-color: #060b13; }
+        .logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 2px solid #38bdf8; display: block; }
+        .greeting { padding: 0 30px; margin-top: 24px; font-size: 16px; color: #555; }
+        .title { padding: 0 30px; font-size: 28px; font-weight: bold; color: #0f172a; margin-bottom: 5px; }
+        .confirmation { padding: 0 30px; font-size: 16px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; }
+        .conf-number { color: #0284c7; font-weight: bold; }
         .hero-image { width: 100%; height: auto; display: block; border-radius: 24px; margin: 10px 0 20px; -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
-        .section { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
+        .section { padding: 20px 30px; border-bottom: 1px solid #e2e8f0; }
         .row { display: flex; margin-bottom: 15px; }
-        .row .left { width: 40%; font-size: 14px; color: #777; }
+        .row .left { width: 40%; font-size: 14px; color: #64748b; }
         .row .right { width: 60%; font-size: 14px; color: #333; font-weight: bold; }
         .amenities-list { list-style-type: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 15px; }
         .amenities-list li { display: flex; align-items: center; font-size: 13px; color: #555; }
         .amenities-list img { width: 24px; height: 24px; margin-right: 8px; }
-        .footer { padding: 30px; background-color: #f9f9f9; text-align: center; font-size: 12px; color: #777; }
+        .footer { padding: 30px; background-color: #060b13; text-align: center; font-size: 12px; color: #94a3b8; }
         .footer img { max-width: 100px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ img_prefix }}logo.png" alt="NexCell Hotels Logo" class="logo">
+            <img src="{{ img_prefix }}logo.png" alt="Crown & Crest Logo" class="logo">
         </div>
         
         <div class="greeting">Hey, {{ guest_name }}</div>
         <div class="title">Action Required: Complete Payment</div>
         <div class="confirmation">
-            <span style="color: #e25950; font-weight: bold;">Your room is locked for 24 hours.</span><br>
+            <span style="color: #ef4444; font-weight: bold;">Your room is locked for 24 hours.</span><br>
             Reference Number: <span class="conf-number">{{ booking_id }}</span>
         </div>
         
@@ -75,7 +75,7 @@
                     <ul class="amenities-list">
                         <li><img src="{{ img_prefix }}wifi.png" alt="Wi-Fi"> Wi-Fi</li>
                         <li><img src="{{ img_prefix }}gym.png" alt="Gym"> 24/7 Gym</li>
-                        <li><img src="{{ img_prefix }}pool.png" alt="Pool"> Heated Pool</li>
+                        <li><img src="{{ img_prefix }}pool.png" alt="Pool"> Thermal Pool</li>
                         <li><img src="{{ img_prefix }}parking.png" alt="Parking"> Free Parking</li>
                     </ul>
                 </div>
@@ -97,7 +97,7 @@
                 <div class="left">Amount Breakdown</div>
                 <div class="right">
                     £{{ price_per_night }} x {{ nights }} nights<br>
-                    <hr style="margin: 5px 0; border: 0; border-top: 1px solid #e0e0e0;">
+                    <hr style="margin: 5px 0; border: 0; border-top: 1px solid #e2e8f0;">
                     <strong>Total: £{{ total_amount }}</strong>
                 </div>
             </div>
@@ -114,23 +114,23 @@
 
         <div class="section" style="text-align: center; padding: 30px;">
             <p style="margin-bottom: 20px; font-size: 16px;">To confirm your booking, please complete your payment securely via our portal.</p>
-            <a href="{{ payment_url }}" style="display: inline-block; background-color: #5469d4; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 16px;">Complete Payment</a>
+            <a href="{{ payment_url }}" style="display: inline-block; background-color: #0284c7; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 6px rgba(2,132,199,0.2);">Complete Payment</a>
         </div>
 
         <div class="section">
             <div class="row">
                 <div class="left">Hotel Address</div>
                 <div class="right" style="font-weight: normal;">
-                    NexCell Hotel {{ branch_name }},<br>
+                    Crown & Crest Hotel {{ branch_name }},<br>
                     {{ branch_address }}
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <img src="{{ img_prefix }}logo.png" alt="NexCell Hotels Logo"><br>
+            <img src="{{ img_prefix }}logo.png" alt="Crown & Crest Logo"><br>
             {{ branch_address_inline }}<br><br>
-            &copy; 2026 NexCell Hotels
+            &copy; 2026 Crown & Crest
         </div>
     </div>
 </body>

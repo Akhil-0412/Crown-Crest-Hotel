@@ -177,7 +177,7 @@ async def entrypoint(ctx: JobContext) -> None:
     await session.start(agent=agent, room=ctx.room)
 
     # Proactive greeting
-    greeting = "Welcome to NexCell Hotels! How can I help you today?"
+    greeting = "Welcome to Crown and Crest! How can I help you today?"
     if ctx.room.remote_participants:
         session.say(greeting, allow_interruptions=True)
         
@@ -224,12 +224,12 @@ if __name__ == "__main__":
     if not os.environ.get("LIVEKIT_URL"):
         print("\n[Voice Worker] ⚠️ LIVEKIT_URL is not set. The voice assistant will not start.")
         print("[Voice Worker] ⚠️ Please configure your LiveKit credentials in the .env file.")
-        print("[Voice Worker] ⚠️ The rest of the NexCell system (MCP and Portal) is running normally.\n", flush=True)
+        print("[Voice Worker] ⚠️ The rest of the Crown & Crest system (MCP and Portal) is running normally.\n", flush=True)
         sys.exit(0)
 
     cli.run_app(
         WorkerOptions(
-            agent_name="nexcell-receptionist",
+            agent_name="crown-crest-receptionist",
             entrypoint_fnc=entrypoint,
             load_threshold=0.99,  # free tier has low CPU ceiling; don't mark unavailable prematurely
             num_idle_processes=0,  # don't pre-spawn worker processes — saves RAM on free tier

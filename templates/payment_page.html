@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexCell Hotels – Secure Checkout</title>
+    <title>Crown & Crest – Secure Checkout</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -43,12 +43,12 @@
         }
         .logo-icon {
             width: 40px; height: 40px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
             font-size: 20px;
         }
-        .brand-name { font-size: 22px; font-weight: 700; color: #f1f5f9; }
+        .brand-name { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #f1f5f9; }
         .subtitle { font-size: 13px; color: #64748b; margin-top: 4px; }
 
         /* Timer */
@@ -92,7 +92,7 @@
             align-items: center;
         }
         .total-label { font-size: 14px; font-weight: 600; color: #94a3b8; }
-        .total-amount { font-size: 24px; font-weight: 700; color: #a78bfa; }
+        .total-amount { font-size: 24px; font-weight: 700; color: #38bdf8; }
 
         /* Form */
         .form-section { margin-bottom: 24px; }
@@ -120,8 +120,8 @@
         }
         input[type=text]::placeholder { color: #475569; }
         input[type=text]:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
         }
 
         .row-two {
@@ -145,7 +145,7 @@
         .pay-btn {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #0284c7, #6366f1);
             color: white;
             border: none;
             border-radius: 10px;
@@ -172,7 +172,7 @@
             color: #475569;
             margin-top: 16px;
         }
-        .mock-notice strong { color: #6366f1; }
+        .mock-notice strong { color: #38bdf8; }
     </style>
 
     <script>
@@ -213,8 +213,8 @@
 
     <div class="header">
         <div class="logo-wrap">
-            <div class="logo-icon">🏨</div>
-            <span class="brand-name">NexCell Hotels</span>
+            <div class="logo-icon">👑</div>
+            <span class="brand-name">Crown & Crest</span>
         </div>
         <p class="subtitle">{% if is_diff %}Modification Payment{% else %}Secure Checkout{% endif %}</p>
     </div>
@@ -229,7 +229,7 @@
     <div class="summary">
         <div class="summary-row">
             <span class="summary-label">Reference</span>
-            <span class="summary-value" style="font-family:monospace;color:#a78bfa">{{ booking.reference }}</span>
+            <span class="summary-value" style="font-family:monospace;color:#38bdf8">{{ booking.reference }}</span>
         </div>
         <div class="summary-row">
             <span class="summary-label">Guest</span>
@@ -237,7 +237,7 @@
         </div>
         <div class="summary-row">
             <span class="summary-label">Hotel</span>
-            <span class="summary-value">NexCell {{ booking.branch | title }}</span>
+            <span class="summary-value">Crown & Crest {{ booking.branch | title }}</span>
         </div>
         <div class="summary-row">
             <span class="summary-label">Room</span>
@@ -300,7 +300,7 @@
         </button>
     </form>
 
-    <p class="mock-notice"><strong>Mock Stripe Gateway</strong> · NexCell Hotels Demo</p>
+    <p class="mock-notice"><strong>Mock Stripe Gateway</strong> · Crown & Crest Demo</p>
 </div>
 </body>
 </html>

@@ -3,31 +3,31 @@
 <head>
     <meta charset="utf-8">
     <style>
-        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 20px; background-color: #f9f9f9; }
-        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0; border: 1px solid #e0e0e0; }
-        .header { padding: 30px; text-align: left; border-bottom: 5px solid #24b47e; }
-        .logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #24b47e; display: block; }
-        .greeting { padding: 0 30px; margin-top: 20px; font-size: 16px; color: #555; }
-        .title { padding: 0 30px; font-size: 28px; font-weight: bold; color: #24b47e; margin-bottom: 5px; }
-        .confirmation { padding: 0 30px; font-size: 16px; margin-bottom: 20px; border-bottom: 2px solid #e0e0e0; padding-bottom: 20px; }
-        .conf-number { color: #5469d4; font-weight: bold; }
+        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 20px; background-color: #f5f8fa; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .header { padding: 30px; text-align: left; background-color: #060b13; border-bottom: 5px solid #38bdf8; }
+        .logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 2px solid #38bdf8; display: block; }
+        .greeting { padding: 0 30px; margin-top: 24px; font-size: 16px; color: #555; }
+        .title { padding: 0 30px; font-size: 28px; font-weight: bold; color: #0284c7; margin-bottom: 5px; }
+        .confirmation { padding: 0 30px; font-size: 16px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; }
+        .conf-number { color: #0284c7; font-weight: bold; }
         .hero-image { width: 100%; height: auto; display: block; margin: 10px 0 20px; -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
-        .section { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
+        .section { padding: 20px 30px; border-bottom: 1px solid #e2e8f0; }
         .row { display: flex; margin-bottom: 15px; }
-        .row .left { width: 40%; font-size: 14px; color: #777; }
+        .row .left { width: 40%; font-size: 14px; color: #64748b; }
         .row .right { width: 60%; font-size: 14px; color: #333; font-weight: bold; }
         .amenities-list { list-style-type: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 15px; }
         .amenities-list li { display: flex; align-items: center; font-size: 13px; color: #555; }
         .amenities-list img { width: 24px; height: 24px; margin-right: 8px; }
-        .footer { padding: 30px; background-color: #f9f9f9; text-align: center; font-size: 12px; color: #777; }
+        .footer { padding: 30px; background-color: #060b13; text-align: center; font-size: 12px; color: #94a3b8; }
         .footer img { max-width: 100px; margin-bottom: 15px; }
-        .badge { display: inline-block; background-color: #24b47e; color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 10px;}
+        .badge { display: inline-block; background-color: #38bdf8; color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 10px;}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ img_prefix }}logo.png" alt="NexCell Hotels Logo" class="logo">
+            <img src="{{ img_prefix }}logo.png" alt="Crown & Crest Logo" class="logo">
         </div>
         
         <div class="greeting">Hey, {{ guest_name }}</div>
@@ -76,7 +76,7 @@
                     <ul class="amenities-list">
                         <li><img src="{{ img_prefix }}wifi.png" alt="Wi-Fi"> Wi-Fi</li>
                         <li><img src="{{ img_prefix }}gym.png" alt="Gym"> 24/7 Gym</li>
-                        <li><img src="{{ img_prefix }}pool.png" alt="Pool"> Heated Pool</li>
+                        <li><img src="{{ img_prefix }}pool.png" alt="Pool"> Thermal Pool</li>
                         <li><img src="{{ img_prefix }}parking.png" alt="Parking"> Free Parking</li>
                     </ul>
                 </div>
@@ -98,20 +98,20 @@
                 <div class="left">Payment Receipt</div>
                 <div class="right">
                     £{{ price_per_night }} x {{ nights }} nights<br>
-                    <hr style="margin: 5px 0; border: 0; border-top: 1px solid #e0e0e0;">
+                    <hr style="margin: 5px 0; border: 0; border-top: 1px solid #e2e8f0;">
                     <strong>New Total: £{{ total_amount }}</strong><br>
                     {% if has_modifications %}
-                        <hr style="margin: 5px 0; border: 0; border-top: 1px solid #e0e0e0;">
+                        <hr style="margin: 5px 0; border: 0; border-top: 1px solid #e2e8f0;">
                         <span style="color: #777; font-size: 12px;">Payment History:</span><br>
                         {% for payment in payments %}
                             <span style="font-size: 12px;">- Payment ({{ payment.created_at[:10] }}): £{{ payment.amount_gbp }}</span><br>
                         {% endfor %}
                         <strong>Total Paid: £{{ total_paid }}</strong><br>
                         {% if balance_due > 0 %}
-                            <strong style="color: #d9534f;">Amount Due: £{{ balance_due }}</strong><br>
-                            <a href="{{ diff_payment_url }}" style="display: inline-block; margin-top: 10px; background-color: #5469d4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Pay Balance Due</a><br>
+                            <strong style="color: #ef4444;">Amount Due: £{{ balance_due }}</strong><br>
+                            <a href="{{ diff_payment_url }}" style="display: inline-block; margin-top: 10px; background-color: #0284c7; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; box-shadow: 0 4px 6px rgba(2,132,199,0.2);">Pay Balance Due</a><br>
                         {% elif refund_due > 0 %}
-                            <strong style="color: #24b47e;">Refund Due: £{{ refund_due }}</strong><br>
+                            <strong style="color: #38bdf8;">Refund Due: £{{ refund_due }}</strong><br>
                             <span style="color: #777; font-size: 12px;">The difference amount will be in your account shortly.</span>
                         {% else %}
                             <span style="color: #777; font-size: 12px;">Payment confirmed for this reservation.</span>
@@ -141,16 +141,16 @@
             <div class="row">
                 <div class="left">Hotel Address</div>
                 <div class="right" style="font-weight: normal;">
-                    NexCell Hotel {{ branch_name }},<br>
+                    Crown & Crest Hotel {{ branch_name }},<br>
                     {{ branch_address }}
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <img src="{{ img_prefix }}logo.png" alt="NexCell Hotels Logo"><br>
+            <img src="{{ img_prefix }}logo.png" alt="Crown & Crest Logo"><br>
             {{ branch_address_inline }}<br><br>
-            &copy; 2026 NexCell Hotels
+            &copy; 2026 Crown & Crest
         </div>
     </div>
 </body>

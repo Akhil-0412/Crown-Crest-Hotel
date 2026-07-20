@@ -63,10 +63,10 @@ import uvicorn
 # ---------------------------------------------------------------------------
 
 mcp = FastMCP(
-    "NexCellServicesMCP",
+    "CrownCrestServicesMCP",
     instructions=(
         "Provides hotel availability checks, booking management, "
-        "and FAQ lookup for the NexCell voice assistant."
+        "and FAQ lookup for the Crown & Crest voice assistant."
     ),
     version="2026.1.0",
 )
@@ -89,21 +89,22 @@ _FAQ_STORE: list[dict[str, str]] = [
     {
         "question": "What amenities do you have? What facilities are available?",
         "answer": (
-            "Every NexCell branch offers a superb set of standard five-star amenities: "
+            "Every Crown & Crest branch offers a superb set of standard wellness and winter amenities: "
             "complimentary 1 Gbps Wi-Fi throughout the building, "
             "a fully equipped in-house gym open 24 hours, "
-            "a heated indoor swimming pool with jacuzzi, "
-            "a sauna and steam wellness suite, "
-            "an in-house restaurant and bar open 24 hours, "
+            "heated indoor and outdoor thermal pools with jacuzzis, "
+            "a Finnish sauna and eucalyptus steam wellness suite, "
+            "dedicated massage therapy and body treatment rooms, "
+            "cozy lounges with wood-burning fireplaces and a complimentary hot cocoa bar, "
+            "an organic restaurant and winter lounge open 24 hours, "
             "24-hour room service, "
             "complimentary on-site parking, "
-            "a business centre with private meeting rooms, "
-            "and a concierge and valet service. "
-            "Complimentary breakfast is included for all Deluxe Double and Executive Suite guests. "
-            "And each of our branches has its own signature experience — "
+            "and a wellness concierge. "
+            "A complimentary thermal breakfast basket is delivered to the door for all Thermal Double and Sanctuary Suite guests. "
+            "And each of our branches has its own signature spa experience — "
             "which branch are you planning to stay at? I'd love to tell you what makes it truly special."
         ),
-        "tags": "amenities gym swimming pool wifi dining restaurant bar room service concierge parking business lounge wellness sauna jacuzzi breakfast",
+        "tags": "amenities gym swimming pool wifi dining restaurant bar room service concierge parking fireplace wellness sauna jacuzzi breakfast spa massage cocoa",
     },
     {
         "question": "Do you have a gym or fitness centre?",
@@ -117,56 +118,55 @@ _FAQ_STORE: list[dict[str, str]] = [
     {
         "question": "Do you have a swimming pool?",
         "answer": (
-            "Yes! All NexCell branches feature a beautiful heated indoor swimming pool with a jacuzzi. "
+            "Yes! All Crown & Crest branches feature a beautiful heated indoor swimming pool and outdoor thermal hot springs. "
             "Pool towels are complimentary and available throughout the day."
         ),
-        "tags": "swimming pool jacuzzi heated indoor",
+        "tags": "swimming pool jacuzzi heated indoor hot springs thermal",
     },
     {
         "question": "Is there Wi-Fi?",
         "answer": (
-            "Complimentary ultra-high-speed Wi-Fi — up to 1 Gbps — is available throughout every NexCell Hotel, "
-            "in all guest rooms, the lobby, restaurant, pool area, and meeting rooms."
+            "Complimentary ultra-high-speed Wi-Fi — up to 1 Gbps — is available throughout every Crown & Crest Hotel, "
+            "in all guest rooms, the lobby, restaurant, pool area, and relaxation lounges."
         ),
         "tags": "wifi internet connection speed broadband",
     },
     {
         "question": "What dining options do you have? Is there a restaurant?",
         "answer": (
-            "Every branch has an in-house restaurant and bar open 24 hours a day. "
-            "We serve a full cooked breakfast from 7 AM, an à la carte lunch menu, "
-            "and a contemporary dinner menu crafted by our executive chef. "
+            "Every branch has an in-house organic restaurant and winter lounge open 24 hours a day. "
+            "We serve a full thermal breakfast basket from 7 AM, a seasonal à la carte lunch, "
+            "and a contemporary organic dinner menu crafted by our executive chef. "
             "24-hour room service is also available for guests who prefer dining in their room."
         ),
-        "tags": "dining restaurant food breakfast lunch dinner room service bar 24 hour",
+        "tags": "dining restaurant food breakfast lunch dinner room service bar 24 hour organic",
     },
     {
         "question": "Is breakfast included?",
         "answer": (
-            "Complimentary breakfast is included as standard for Deluxe Double and Executive Suite guests — "
-            "a full continental and cooked English breakfast served daily from 7 AM to 10:30 AM. "
-            "Standard Twin guests can add it for just £15 per person per day."
+            "A complimentary thermal breakfast basket is delivered to the door for all Thermal Double and Crest Sanctuary Suite guests — "
+            "served daily from 7 AM to 10:30 AM. Cozy Twin guests can add it for just £15 per person per day."
         ),
-        "tags": "breakfast included complimentary deluxe executive standard twin",
+        "tags": "breakfast included complimentary deluxe executive standard twin thermal basket",
     },
     {
         "question": "What room types do you have and what are their guest capacities?",
         "answer": (
             "We offer three luxurious room types across all our branches: "
-            "1) Standard Twin, which comfortably accommodates up to 4 guests. "
-            "2) Deluxe Double, designed for up to 5 guests. "
-            "3) Premium Suite (our Executive Suite), which allows for 2 guests plus 1 child."
+            "1) Cozy Twin (Standard Twin), which comfortably accommodates up to 4 guests. "
+            "2) Thermal Double (Deluxe Double), designed for up to 5 guests. "
+            "3) Crest Sanctuary Suite (Premium Suite / Executive Suite), which allows for 2 guests plus 1 child."
         ),
         "tags": "room type capacity guests standard twin deluxe double premium suite executive how many",
     },
     {
         "question": "What exclusive amenities do Premium Suite guests receive?",
         "answer": (
-            "Our Premium Suites offer the ultimate luxury experience. Across all three branches, "
-            "Premium Suite guests enjoy an unlimited food selection across all hotel restaurants, "
-            "along with unlimited dessert snacks and refreshments through our 24-hour room service."
+            "Our Crest Sanctuary Suites offer the ultimate wellness luxury. Across all three branches, "
+            "Sanctuary Suite guests enjoy an unlimited organic food selection across all hotel restaurants, "
+            "along with unlimited dessert snacks and aromatherapy room service refreshments 24 hours a day."
         ),
-        "tags": "premium suite executive exclusive unlimited food dessert snacks refreshments room service",
+        "tags": "premium suite executive exclusive unlimited food dessert snacks refreshments room service aromatherapy",
     },
     # -----------------------------------------------------------------------
     # Branch-specific unique amenities — exact per user specification
@@ -174,40 +174,40 @@ _FAQ_STORE: list[dict[str, str]] = [
     {
         "question": "What unique amenities does the London branch have? What is special about London?",
         "answer": (
-            "Our London branch is our crown jewel. "
+            "Our London branch is our wellness crown jewel. "
             "As a guest, you'll enjoy complimentary fine dining at our on-site Michelin-star restaurant. "
             "You'll also receive three complimentary tickets per guest to iconic London landmarks — "
             "think the Tower of London, the Shard, or Buckingham Palace. "
             "On top of that, we include a complimentary taxi transfer to any one destination of your choice in the city. "
-            "You'll also have access to the NexCell Prestige Spa — a stunning 3,000 square foot luxury treatment centre — "
-            "and our rooftop infinity pool and sky bar on the 15th floor with breathtaking panoramic views of the London skyline."
+            "You'll also have access to the Crown Sanctuary Spa — a stunning 3,000 square foot luxury treatment centre — "
+            "and our heated glass-domed rooftop thermal pool and sky lounge with breathtaking panoramic views of the London skyline."
         ),
-        "tags": "london unique fine dining michelin star tickets monuments landmarks taxi spa rooftop infinity pool sky bar",
+        "tags": "london unique fine dining michelin star tickets monuments landmarks taxi spa rooftop thermal pool sky lounge glass dome",
     },
     {
         "question": "What unique amenities does the Manchester branch have? What is special about Manchester?",
         "answer": (
-            "Manchester is full of energy, and our hotel delivers that in spades. "
-            "Exclusive highlights include private cinema rooms you can book by the hour, "
-            "a complimentary private airport drop included with Premium Suite stays, "
-            "a full-service luxury in-house spa, "
-            "and a complimentary activity pass valid across five of Manchester's most iconic nearby attractions of your choice. "
-            "It's the ultimate urban staycation."
+            "Manchester is a haven of cozy relaxation. "
+            "Exclusive highlights include private sound-bath relaxation rooms, "
+            "a complimentary private airport drop included with Sanctuary Suite stays, "
+            "a full-service Finnish sauna suite, "
+            "and a complimentary wellness pass valid across five of Manchester's most iconic nearby attractions or spas."
+            "It's the ultimate winter wellness staycation."
         ),
-        "tags": "manchester unique cinema room private airport drop luxury spa activity pass attractions monuments",
+        "tags": "manchester unique sound bath private airport drop sauna spa activity pass wellness",
     },
     {
         "question": "What unique amenities does the Edinburgh branch have? What is special about Edinburgh?",
         "answer": (
-            "Edinburgh is our most immersive and experiential destination. "
+            "Edinburgh is our most immersive winter escape. "
             "Guests enjoy an on-site ice skating rink — perfect for a magical winter visit — "
-            "alongside fine dining with a curated Scottish tasting menu by our head chef. "
+            "alongside fine dining with a curated winter Scottish tasting menu by our head chef. "
             "The property also features a traditional Hammam spa with steam rituals and therapeutic treatments, "
-            "and a stunning heated artificial lagoon for relaxing outdoor bathing year-round. "
+            "and a stunning heated outdoor geothermal lagoon for relaxing outdoor bathing under the winter sky. "
             "The Scottish Spirits Bar inside the hotel features over 200 rare single malts, "
             "and guided Highland hiking tours depart directly from the hotel."
         ),
-        "tags": "edinburgh unique ice skating rink fine dining scottish tasting menu hammam spa artificial lagoon whisky spirits bar highland hiking",
+        "tags": "edinburgh unique ice skating rink fine dining winter tasting menu hammam spa geothermal lagoon outdoor bath whisky single malt",
     },
     # -----------------------------------------------------------------------
     # Hotel policies
@@ -258,7 +258,7 @@ _FAQ_STORE: list[dict[str, str]] = [
     {
         "question": "Are accessible or disability-friendly rooms available?",
         "answer": (
-            "Yes, all NexCell branches have fully accessible rooms with roll-in showers, "
+            "Yes, all Crown & Crest branches have fully accessible rooms with roll-in showers, "
             "wide doorways, lowered fixtures, and hearing-loop systems. "
             "We recommend requesting one at booking to guarantee availability."
         ),
@@ -267,7 +267,7 @@ _FAQ_STORE: list[dict[str, str]] = [
     {
         "question": "Is there a loyalty programme or membership?",
         "answer": (
-            "Yes! Our NexCell Prestige Club is completely free to join. "
+            "Yes! Our Crown & Crest Prestige Club is completely free to join. "
             "Every night you stay earns points redeemable for complimentary nights, spa treatments, or dining credits. "
             "Just ask at reception on check-in to sign up."
         ),
@@ -500,7 +500,7 @@ async def check_availability(
         date_inventory = {rt_key: date_inventory[rt_key]}
 
     lines: list[str] = [
-        f"Availability at NexCell {payload.branch.title()} \n"
+        f"Availability at Crown & Crest {payload.branch.title()} \n"
         f"from {payload.arrival_date} for {payload.nights} night(s):",
     ]
     any_available = False
@@ -561,7 +561,7 @@ async def create_booking(
 
     room_info = date_inventory[rt_key]
     if room_info["units"] <= 0:
-        return f"ERROR: '{payload.room_type.replace('_', ' ').title()}' is sold out at NexCell {payload.branch.title()} on {payload.arrival_date}."
+        return f"ERROR: '{payload.room_type.replace('_', ' ').title()}' is sold out at Crown & Crest {payload.branch.title()} on {payload.arrival_date}."
 
     total_cost = room_info["price_gbp"] * payload.nights
 
@@ -584,7 +584,7 @@ async def create_booking(
         f"[LOCKED] Booking Locked for 24 hours!\\n"
         f"  Reference     : {booking_ref}\\n"
         f"  Guest         : {payload.guest_full_name}\\n"
-        f"  Hotel         : NexCell {payload.branch.title()}\\n"
+        f"  Hotel         : Crown & Crest {payload.branch.title()}\\n"
         f"  Room          : {label}\\n"
         f"  Check-in      : {payload.arrival_date}\\n"
         f"  Check-out     : {checkout}\\n"
@@ -845,7 +845,7 @@ async def _generate_invoice_html(booking_id: str, email_address: str) -> tuple[b
         sent = await asyncio.to_thread(
             _send_email_resend,
             email_address,
-            f"Your NexCell Booking: {booking_id}",
+            f"Your Crown & Crest Booking: {booking_id}",
             email_html,
         )
         email_status = (

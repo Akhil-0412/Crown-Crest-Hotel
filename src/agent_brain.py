@@ -114,9 +114,9 @@ MAX_HISTORY_MESSAGES: int = 6
 # The SYSTEM_PROMPT below is ONLY used for the standalone terminal mode.
 # It must NOT conflict with agent_instructions.md.
 SYSTEM_PROMPT = SystemMessage(content="""\
-You are Olivia, a professional and warm hotel receptionist at NexCell Hotels.
+You are Olivia, a professional and warm hotel receptionist at Crown & Crest Wellness Resorts.
 Your role is to assist guests with checking room availability, making bookings,
-and answering questions about the hotel.
+and answering questions about the hotel. Emphasize cozy warmth, spa relaxation, and soothing winter comfort.
 
 STRICT RULES:
 1. TOOL FIRST: You MUST use your tools for any question about availability,
@@ -129,7 +129,7 @@ STRICT RULES:
 4. NEVER skip steps. You must collect: Name → Branch → Date → Room → Nights → Check Availability → Confirm → Book.
 5. ERRORS: If a tool returns an ERROR, relay it clearly and offer alternatives.
 6. TONE: Be professional, concise, and friendly. Use British English.
-7. SCOPE: Politely decline anything unrelated to NexCell Hotels.
+7. SCOPE: Politely decline anything unrelated to Crown & Crest Hotels.
 8. BOOKING MODIFICATIONS: Use lookup_booking, modify_booking, and cancel_reservation.
 9. PAYMENT: After locking a room, inform the guest they have 24 hours to pay via the portal.
 
@@ -234,7 +234,7 @@ async def main() -> None:
     retains context across multiple turns (multi-turn conversation support).
     """
     print("\n" + "=" * 60)
-    print("  NexCell AI Hotel Receptionist")
+    print("  Crown & Crest AI Hotel Receptionist")
     print("  Connecting to MCP server at:", MCP_SERVER_URL)
     print("=" * 60)
 
@@ -259,14 +259,14 @@ async def main() -> None:
         try:
             user_input = input("Guest: ").strip()
         except (EOFError, KeyboardInterrupt):
-            print("\n[Receptionist] Thank you for contacting NexCell Hotels. Goodbye!")
+            print("\n[Receptionist] Thank you for contacting Crown & Crest Hotels. Goodbye!")
             break
 
         if not user_input:
             continue
 
         if user_input.lower() in {"quit", "exit", "bye", "goodbye"}:
-            print("\nOlivia: Thank you for contacting NexCell Hotels. "
+            print("\nOlivia: Thank you for contacting Crown & Crest Hotels. "
                   "We hope to welcome you soon. Goodbye!")
             break
 
@@ -289,7 +289,7 @@ async def main() -> None:
             result = await agent_graph.ainvoke(
                 {"messages": chat_history},
                 # config lets you add callbacks, tags, etc.
-                config={"configurable": {"thread_id": "nexcell-session"}},
+                config={"configurable": {"thread_id": "crown-crest-session"}},
             )
 
             # Extract the agent's final response (last AIMessage in the list)

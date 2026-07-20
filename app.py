@@ -82,7 +82,7 @@ async def lifespan(app: FastAPI):
 # FastAPI application
 # ---------------------------------------------------------------------------
 
-app = FastAPI(title="NexCell Hotel Backend", version="2026.1.0", lifespan=lifespan)
+app = FastAPI(title="Crown & Crest Hotel Backend", version="2026.1.0", lifespan=lifespan)
 
 # Mount static assets (images, CSS, etc.)
 _assets_dir = os.path.join(os.path.dirname(__file__), "assets")
@@ -102,7 +102,7 @@ for route in payment_routes + invoice_routes:
 def read_root() -> str:
     return """
     <html><body style="font-family:sans-serif;padding:40px;background:#0f172a;color:#e2e8f0">
-    <h1>🏨 NexCell Hotel Backend</h1>
+    <h1>🏨 Crown & Crest Hotel Backend</h1>
     <p>MCP Server: <code>http://127.0.0.1:8000/sse</code></p>
     <p>Payment Portal: <code>/api/pay/&lt;reference&gt;</code></p>
     <p>Status: <strong style="color:#4ade80">Running ✓</strong></p>
@@ -112,7 +112,7 @@ def read_root() -> str:
 
 @app.get("/api/health")
 def health_check() -> dict:
-    return {"status": "ok", "service": "nexcell-backend"}
+    return {"status": "ok", "service": "crown-crest-backend"}
 
 
 # ---------------------------------------------------------------------------
@@ -121,5 +121,5 @@ def health_check() -> dict:
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    print(f"[Orchestrator] Starting NexCell on port {port}...", flush=True)
+    print(f"[Orchestrator] Starting Crown & Crest on port {port}...", flush=True)
     uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
