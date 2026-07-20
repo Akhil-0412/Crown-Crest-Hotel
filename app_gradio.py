@@ -383,7 +383,7 @@ def transcribe_demo(audio):
         return f"Transcription error: {e}"
 
 
-with gr.Blocks(css=CSS, title="NexCell Hotels — Olivia AI Receptionist") as demo:
+with gr.Blocks(css=CSS, title="Crown & Crest — Olivia AI Receptionist") as demo:
     gr.HTML(HERO_HTML)
 
     with gr.Tabs(elem_classes=["tab-nav"]):
