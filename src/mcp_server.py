@@ -538,7 +538,7 @@ async def create_booking(
     nights: int = 1,
     guest_email: str | None = None,
 ) -> str:
-    """Create a reservation. Validates availability, generates a unique HTL reference, and persists the record as LOCKED."""
+    """Create a reservation. Validates availability, generates a unique Booking reference, and persists the record as LOCKED."""
     payload = BookingRequest(
         guest_full_name=guest_full_name,
         branch=branch,

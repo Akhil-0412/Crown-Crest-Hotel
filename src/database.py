@@ -27,14 +27,14 @@ else:
 
 
 ROOM_TYPE_CODES = {
-    "standard_twin": "ST",
+    "standard_twin": "STR",
     "deluxe_double": "DXD",
-    "executive_suite": "PS",
+    "executive_suite": "EXS",
 }
 BRANCH_CODES = {
-    "london": "LND",
-    "manchester": "MAN",
-    "edinburgh": "EDN",
+    "london": "L",
+    "manchester": "M",
+    "edinburgh": "E",
 }
 
 # Base inventory info for calculation
@@ -119,38 +119,42 @@ def init_db():
 
 def generate_reference(room_type: str, branch: str, status: str = "LCK") -> str:
     room_code = ROOM_TYPE_CODES.get(room_type, "UNK")
-    branch_code = BRANCH_CODES.get(branch.lower(), "UNK")
-    chars_needed = max(0, 5 - len(room_code))
-    unique_part = ''.join(random.choices('ABCDEFGHJKLMNPQRSTUVWXYZ23456789', k=chars_needed))
-    identity = f"{room_code}{unique_part}"[:5]
-    return f"HTL-{status}-{identity}-{branch_code}"
+    branch_code = BRANCH_CODES.get(branch.lower(), "U")
+    unique_part = ''.join(random.choices('ABCDEFGHJKLMNPQRSTUVWXYZ23456789', k=4))
+    return f"CC{branch_code}{unique_part}{room_code}"
 
 def update_reference_status(old_ref: str, new_status: str) -> str:
-    """Changes HTL-LCK-ST123-LND to HTL-BKD-ST123-LND"""
-    parts = old_ref.split("-")
-    if len(parts) == 4:
-        parts[1] = new_status
-        return "-".join(parts)
+    """Status is no longer embedded in the reference string in the new format."""
+    if old_ref.startswith("HTL-"):
+        parts = old_ref.split("-")
+        if len(parts) == 4:
+            parts[1] = new_status
+            return "-".join(parts)
     return old_ref
 
 def update_reference_room_type(old_ref: str, new_room_type: str) -> str:
-    """Changes HTL-BKD-ST4Q9-LND to HTL-BKD-DXD4Q-LND"""
-    parts = old_ref.split("-")
-    if len(parts) != 4:
-        return old_ref
-        
-    old_identity = parts[2]
+    """Changes CCL4Q9PSTR to CCL4Q9PDXD or legacy HTL-BKD-ST4Q9-LND to HTL-BKD-DXD4Q-LND"""
     new_room_code = ROOM_TYPE_CODES.get(new_room_type, "UNK")
     
-    # Keep the alphanumeric tail, adjust to 5 chars
-    unique_tail = old_identity[len(old_identity) - (5 - len(new_room_code)):] if 5 > len(new_room_code) else ""
-    # If tail is too short, pad with random char
-    while len(new_room_code) + len(unique_tail) < 5:
-        unique_tail += random.choice('ABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+    if old_ref.startswith("CC"):
+        return old_ref[:-3] + new_room_code
         
-    new_identity = f"{new_room_code}{unique_tail[:5-len(new_room_code)]}"
-    parts[2] = new_identity
-    return "-".join(parts)
+    if old_ref.startswith("HTL-"):
+        parts = old_ref.split("-")
+        if len(parts) != 4:
+            return old_ref
+            
+        old_identity = parts[2]
+        # Keep the alphanumeric tail, adjust to 5 chars
+        unique_tail = old_identity[len(old_identity) - (5 - len(new_room_code)):] if 5 > len(new_room_code) else ""
+        while len(new_room_code) + len(unique_tail) < 5:
+            unique_tail += random.choice('ABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+            
+        new_identity = f"{new_room_code}{unique_tail[:5-len(new_room_code)]}"
+        parts[2] = new_identity
+        return "-".join(parts)
+        
+    return old_ref
 
 def get_availability(branch: str, check_date: str) -> dict:
     branch_key = branch.lower()
