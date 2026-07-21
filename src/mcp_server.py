@@ -701,7 +701,7 @@ def _send_email_resend(to_email: str, subject: str, html_content: str) -> bool:
         return False
         
     resend.api_key = resend_api_key
-    sender = "onboarding@resend.dev"
+    sender = os.environ.get("RESEND_SENDER_EMAIL", "onboarding@resend.dev")
     
     try:
         params: resend.Emails.SendParams = {
