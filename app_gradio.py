@@ -444,12 +444,12 @@ if __name__ == "__main__" or True:
     # Mount payment + invoice routes into the Gradio ASGI app so they are
     # accessible on the public port (7860 on HF Space). Without this, those
     # routes only live on the internal MCP port (8000) which is not exposed.
-    from starlette.applications import Starlette
+    from fastapi import FastAPI
     from starlette.routing import Route
     from src.payment_portal import payment_routes
     from src.mcp_server import invoice_routes
 
-    _portal_app = Starlette(routes=payment_routes + invoice_routes)
+    _portal_app = FastAPI(routes=payment_routes + invoice_routes)
 
     # gr.mount_gradio_app mounts a ASGI sub-application at a path prefix.
     # We mount the portal at /api so /api/pay/... and /api/invoice/... work.
